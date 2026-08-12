@@ -1,0 +1,26 @@
+{
+  "name": "karel-testgen",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "CLI tool to generate Karel test case outputs (.out) from solutions and input worlds (.in)",
+  "bin": {
+    "karel-testgen": "./src/cli.ts"
+  },
+  "scripts": {
+    "generate": "tsx src/cli.ts generate"
+  },
+  "keywords": ["karel", "rekarel", "testgen", "omips"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rekarel/core": "^3.0.1",
+    "@xmldom/xmldom": "^0.9.10",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
+}
