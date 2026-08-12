@@ -1,0 +1,97 @@
+iniciar-programa
+  define-prototipo-instrucción cruz;
+
+  define-nueva-instrucción gira(n) como repetir n veces gira-izquierda;
+
+  define-nueva-instrucción norte como
+    mientras no orientado-al-norte hacer gira-izquierda;
+
+  define-nueva-instrucción sur como
+    mientras no orientado-al-sur hacer gira-izquierda;
+
+  define-nueva-instrucción este como
+    mientras no orientado-al-este hacer gira-izquierda;
+
+  define-nueva-instrucción oeste como
+    mientras no orientado-al-oeste hacer gira-izquierda;
+
+  define-nueva-instrucción pared como mientras frente-libre hacer avanza;
+
+  define-nueva-instrucción zumbador como
+    mientras no junto-a-zumbador y frente-libre hacer avanza;
+
+  define-nueva-instrucción atras como inicio
+    gira(2);
+    avanza;
+    gira(2);
+  fin;
+
+  define-nueva-instrucción esquina como inicio
+    sur;
+    pared;
+    oeste;
+    pared;
+    norte;
+  fin;
+
+  define-nueva-instrucción super-avanza como inicio
+    si frente-libre entonces
+      avanza
+    si-no inicio
+      gira(2);
+      pared;
+      gira(1);
+      si frente-libre entonces inicio
+        avanza;
+        gira(1);
+      fin;
+    fin;
+  fin;
+
+  define-nueva-instrucción siguiente-antena como inicio
+    mientras no junto-a-zumbador y orientado-al-norte hacer super-avanza;
+  fin;
+
+  define-nueva-instrucción siguiente-zumbador como inicio
+    si no junto-a-zumbador y frente-libre entonces inicio
+      avanza;
+      siguiente-zumbador;
+      avanza;
+    fin si-no inicio
+      si junto-a-zumbador entonces inicio
+        coge-zumbador;
+        cruz;
+        gira(2);
+      fin si-no inicio
+        gira(2);
+      fin;
+    fin;
+  fin;
+
+  define-nueva-instrucción cruz como inicio
+    repetir 4 veces inicio
+      siguiente-zumbador;
+      gira(3);
+    fin;
+  fin;
+
+  define-nueva-instrucción resuelve(n) como inicio
+    mientras no orientado-al-este hacer inicio
+      siguiente-antena;
+      si junto-a-zumbador entonces inicio
+        coge-zumbador;
+        cruz;
+        esquina;
+        resuelve(sucede(n));
+      fin;
+    fin;
+    esquina;
+    repetir precede(n) veces deja-zumbador;
+    apágate;
+  fin;
+
+  inicia-ejecución
+    resuelve(0);
+    apágate;
+  termina-ejecución
+finalizar-programa
